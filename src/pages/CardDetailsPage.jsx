@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CircularProgress } from '@mui/material';
+import './CardDetailsPage.css';
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 
 function CardDetails() {
     const { cardId } = useParams(); 
@@ -29,11 +32,12 @@ function CardDetails() {
         <h1>{card.name}</h1>
         {/* row1 */}
         {/* Col1 */}
-        <Grid container spacing={2}>  
+        <Grid container rowSpacing={3} columnSpacing={{ sm: 1, md: 2 }}>  
             <Grid item xs={4} md={4} sx={{}}>
-               <img src={card.images.large} alt="" style={{width: '250px'}}/>
+               <img src={card.images.large} alt="" style={{height: '500px'}}/>
             </Grid>
             <Grid item xs={8} md={8} sx={{}}>
+            <Box sx={{border: '3px solid #3B79C9',borderRadius: "15px" , padding: '25px'}}>
                 <div>
                 <h2>About the card:</h2>
                     <p>Set Name: <Chip label={card.set.name} variant="outlined" /> </p> 
@@ -47,11 +51,19 @@ function CardDetails() {
                 <p>Average Price: {card.cardmarket.prices.trendPrice} €</p>
                 <p>30d Average Price: {card.cardmarket.prices.avg30} €</p>
             </div>
+            </Box>
+            </Grid>
+            <Grid item xs={4} md={4} sx={{}}>
+            <Button variant="contained" href="#contained-buttons" sx={{background: "#3B79C9", border: "4px solid #FFCD05"}}>
+                Add to your collection
+            </Button>
+            </Grid>
+            <Grid item xs={4} md={4}>
+            <Button variant="contained" href={card.cardmarket.url} target="_blank" sx={{background: "#DA1630", border: "4px solid #FFCD05"}}>
+            Buy one online
+            </Button>
             </Grid>
         </Grid>
-        {/* Col2 */}
-
-
         {/* row2 */}
 
         </>
