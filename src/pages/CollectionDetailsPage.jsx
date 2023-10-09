@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CircularProgress, Grid, Card, CardMedia } from "@mui/material";
+import { CircularProgress, Grid, Card, CardMedia, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 function CollectionDetails() {
@@ -43,6 +43,9 @@ function CollectionDetails() {
                     )
                 })}
             </Grid>
+            <Button variant="contained" href="/collections/new" sx={{background: "#3B79C9", border: "4px solid #FFCD05", marginTop: '1em', textTransform: 'capitalize'}}>
+                    Edit your collection
+            </Button>
         </>
     );
 }
