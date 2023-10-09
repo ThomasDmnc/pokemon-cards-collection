@@ -4,18 +4,18 @@ import HomePage from './pages/HomePage'
 import {Route, Routes} from 'react-router-dom'
 import CardDetails from './pages/CardDetailsPage'
 import Navbar from './components/Navbar'
+import NewCollection from './pages/NewCollectionPage'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
     <Navbar />
     <div className='ctn'>    
       <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/cards/:cardId" element={<CardDetails />} />
+      <Route path="/collections/new" element={<NewCollection />} />
 
-      <Route path="cards/:cardId" element={<CardDetails />} />
       <Route path="*" element={<h1>404 Page</h1>} />
 
     </Routes>
