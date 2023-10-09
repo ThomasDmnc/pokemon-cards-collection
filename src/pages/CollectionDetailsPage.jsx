@@ -36,7 +36,7 @@ function CollectionDetails() {
                             <Card sx={{ maxWidth: 245, objectFit:"contain" }} component={Link} to={`/cards/${cardObj}`}>
                                 <CardMedia 
                                     component="img"
-                                    image={`https://images.pokemontcg.io/${cardObjg.replace(/-[^-]*$/, "")}/1_hires.png`}
+                                    image={`https://images.pokemontcg.io/${cardObj.replace(/-[^-]*$/, "")}/1_hires.png`}
                                 />
                             </Card>
                         </Grid>
