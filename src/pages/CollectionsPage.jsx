@@ -17,7 +17,7 @@ function CollectionsPage() {
 
     useEffect(() =>{
         getAllCollections();
-    },[])
+    }, [])
 
 
     //   Object.keys(collections).map(function (key, index) {
