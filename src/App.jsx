@@ -5,6 +5,8 @@ import {Route, Routes} from 'react-router-dom'
 import CardDetails from './pages/CardDetailsPage'
 import Navbar from './components/Navbar'
 import NewCollection from './pages/NewCollectionPage'
+import CollectionsPage from './pages/CollectionsPage'
+import CollectionDetails from './pages/CollectionDetailsPage'
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
       <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/cards/:cardId" element={<CardDetails />} />
+      <Route parth="/collections" element={<CollectionsPage />} />
+      <Route parth="/collections/:collectionId" element={<CollectionDetails />} />
       <Route path="/collections/new" element={<NewCollection />} />
 
       <Route path="*" element={<h1>404 Page</h1>} />
