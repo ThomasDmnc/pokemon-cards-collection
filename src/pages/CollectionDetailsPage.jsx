@@ -32,11 +32,11 @@ function CollectionDetails() {
             <Grid container spacing={5}>
                 {collection.cards && collection.cards.map((cardObj) => {
                     return (
-                        <Grid item key={cardObj.id} xs={6} md={4}>
-                            <Card sx={{ maxWidth: 245, objectFit:"contain" }} component={Link} to={`/cards/${cardObj.id}`}>
+                        <Grid item key={cardObj} xs={6} md={4}>
+                            <Card sx={{ maxWidth: 245, objectFit:"contain" }} component={Link} to={`/cards/${cardObj}`}>
                                 <CardMedia 
                                     component="img"
-                                    image={`https://images.pokemontcg.io/${cardObj.id.replace(/-[^-]*$/, "")}/1_hires.png`}
+                                    image={`https://images.pokemontcg.io/${cardObjg.replace(/-[^-]*$/, "")}/1_hires.png`}
                                 />
                             </Card>
                         </Grid>
