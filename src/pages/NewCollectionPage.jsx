@@ -2,15 +2,37 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import './NewCollectionPage.css'
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 function NewCollection() {
     const [name, setName] = useState();
-    const [description, setDescription] = useState();
+    const [description, setDescription] = useState(); 
+    // console.log(apiString)
+    const apiUrl = import.meta.env.VITE_API_URL;
 
-    async function handleSubmit(){
+
+    async function handleSubmit() {
         event.preventDefault()
-        console.log(name, description)
         const payload = { name, description }
+        
+        try {
+            const response = await fetch(`${apiUrl}/collections`,
+                {
+                    method: 'POST',
+                    body: JSON.stringify(payload),
+                    headers: {
+                    'Content-type': 'application/json',
+                    },
+                }
+            )
+            if (response.ok){
+                const currentCollection = await response.json()
+                console.log(currentCollection)
+                Navigate(`/`)
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
