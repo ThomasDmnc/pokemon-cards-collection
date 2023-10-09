@@ -16,8 +16,8 @@ function App() {
       <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/cards/:cardId" element={<CardDetails />} />
-      <Route parth="/collections" element={<CollectionsPage />} />
-      <Route parth="/collections/:collectionId" element={<CollectionDetails />} />
+      <Route path="/collections" element={<CollectionsPage />} />
+      <Route path="/collections/:collectionId" element={<CollectionDetails />} />
       <Route path="/collections/new" element={<NewCollection />} />
 
       <Route path="*" element={<h1>404 Page</h1>} />
