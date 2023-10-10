@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { TextField, Button, Grid, Card, CardMedia, Checkbox, FormGroup, FormControlLabel  } from '@mui/material'
+import { TextField, Button, Grid, Card, CardMedia} from '@mui/material'
+import bgImg from '../assets/bg-grain.png'
  
 function UpdateCollection() {
     const { collectionId } = useParams();
@@ -19,6 +20,21 @@ function UpdateCollection() {
             setDescription(collectionsApi.description)
         }
     }
+
+    const styles = {
+        cardBackground: {
+            display: "flex", 
+            flexDirection: "column", 
+            alignItems: "center", 
+            justifyContent: "center", 
+            maxWidth: 245, 
+            objectFit: "contain", 
+            padding: '20px', 
+            border: '4px solid #FFCD05', 
+            borderRadius: '15px', 
+            background: 'linear-gradient(180deg, #3B79C9 0%, rgba(116, 155, 207, 0.64) 35.94%, rgba(116, 155, 207, 0.64) 64.06%, #FBFBFB 100%)'
+        }
+    };
 
     useEffect(() => {
         fetchCollection();
@@ -83,7 +99,7 @@ function UpdateCollection() {
                     {cards && cards.map((card) => {
                         return (
                             <Grid item key={card.id} xs={6} md={4} spacing={2} mt={2} mb={2} sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
-                                <Card sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", maxWidth: 245, objectFit: "contain", padding: '20px', border: '4px solid #FFCD05', borderRadius: '15px', background: 'linear-gradient(180deg, #E4A581 0%, rgba(230, 199, 137, 0.56) 26.04%, #E6C789 60.42%, #FFF 100%)' }}>
+                                <Card style={styles.cardBackground}>
                                     <CardMedia 
                                         component="img"
                                         image={card.images.large}
