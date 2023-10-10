@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CircularProgress, Typography } from '@mui/material';
+import { CircularProgress, Snackbar, Typography } from '@mui/material';
 import './CardDetailsPage.css';
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
@@ -18,14 +18,19 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-  };
+};
 
 function CardDetails() {
     const { cardId } = useParams();
     const [card, setCard] = useState();
     const [isLoading, setIsLoading] = useState(true);
-    const [open, setOpen] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
     const [collections, setCollections] = useState()
+    const [snackBar, setSnackBar] = useState({
+        open: false,
+        message: ''
+    });
+    const { open, message } = snackBar;
     const apiUrl = import.meta.env.VITE_API_URL;
 
     const handleOpen = async () => {
@@ -38,31 +43,39 @@ function CardDetails() {
         } catch (error) {
             console.log(error)
         }
-        setOpen(true)
+        setOpenModal(true)
     };
 
     const addCardToCollection = async (collection) => {
-        event.preventDefault()
-        const payload = {cards: [...collection.cards, card] }
-        try {
-            const response = await fetch(`${apiUrl}/collections/${collection.id}`,
-            {
-                method: 'PATCH',
-                body: JSON.stringify(payload),
-                headers: {
-                    'Content-type': 'application/json',
-                },
-            })
-            if (response.ok) {
-                console.log(response)
+        if (collection.cards.includes(cardId)) {
+            setSnackBar({open: true, message: `This Card is alredy in the collection: ${collection.name}`})
+        } else {
+            const payload = { cards: [...collection.cards, card] }
+            try {
+                const response = await fetch(`${apiUrl}/collections/${collection.id}`,
+                    {
+                        method: 'PATCH',
+                        body: JSON.stringify(payload),
+                        headers: {
+                            'Content-type': 'application/json',
+                        },
+                    })
+                if (response.ok) {
+                    setSnackBar({open: true, message: `Card successful added to the collection: ${collection.name}`})
+                }
+            } catch (error) {
+                console.log(error)
             }
-        } catch (error) {
-            console.log(error)
         }
-        setOpen(false)
+        setOpenModal(false)
     };
 
-    const handleClose = () => setOpen(false);
+    const handleCloseModal = () => setOpenModal(false);
+
+    const closeSnackBar = () => setSnackBar(false);
+
+
+    closeSnackBar
 
     async function fetchCardDetails() {
         const response = await fetch(`https://api.pokemontcg.io/v2/cards/${cardId}`)
@@ -117,8 +130,8 @@ function CardDetails() {
                     </Grid>
                 </Grid>
                 <Modal
-                    open={open}
-                    onClose={handleClose}
+                    open={openModal}
+                    onClose={handleCloseModal}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
@@ -128,12 +141,21 @@ function CardDetails() {
                         </Typography>
                         {collections && (<Typography id="modal-modal-description" sx={{ mt: 2 }}>
                             {collections.map((collection) => (
-                                <li key={collection.id}><Button onClick={()=>addCardToCollection(collection)}>{collection.name}</Button></li>
+                                <li key={collection.id}><Button onClick={() => addCardToCollection(collection)}>{collection.name}</Button></li>
                             ))}
-                        </Typography>) }
-                        <Button onClick={handleClose}>No</Button>
+                        </Typography>)}
+                        <Button onClick={handleCloseModal}>No</Button>
                     </Box>
                 </Modal>
+                <Box sx={{ width: 500 }}>
+                    <Snackbar
+                        anchorOrigin={ {vertical: 'top', horizontal: 'center'}}
+                        open={open}
+                        autoHideDuration={3000}
+                        message={message}
+                        onClose={closeSnackBar}
+                    />
+                </Box>
                 {/* row2 */}
             </Fragment>
         )
