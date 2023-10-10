@@ -26,6 +26,11 @@ function CardDetails() {
     const [isLoading, setIsLoading] = useState(true);
     const [openModal, setOpenModal] = useState(false);
     const [collections, setCollections] = useState()
+    const [snackBar, setSnackBar] = useState({
+        open: false,
+        message: ''
+    });
+    const { open, message } = snackBar;
     const apiUrl = import.meta.env.VITE_API_URL;
 
     const handleOpen = async () => {
@@ -66,6 +71,11 @@ function CardDetails() {
     };
 
     const handleCloseModal = () => setOpenModal(false);
+
+    const closeSnackBar = () => setSnackBar(false);
+
+
+    closeSnackBar
 
     async function fetchCardDetails() {
         const response = await fetch(`https://api.pokemontcg.io/v2/cards/${cardId}`)
@@ -137,6 +147,15 @@ function CardDetails() {
                         <Button onClick={handleCloseModal}>No</Button>
                     </Box>
                 </Modal>
+                <Box sx={{ width: 500 }}>
+                    <Snackbar
+                        anchorOrigin={ {vertical: 'top', horizontal: 'center'}}
+                        open={open}
+                        autoHideDuration={3000}
+                        message={message}
+                        onClose={closeSnackBar}
+                    />
+                </Box>
                 {/* row2 */}
             </Fragment>
         )
