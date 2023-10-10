@@ -8,12 +8,13 @@ function NewCollection() {
     const navigate = useNavigate();
     const [name, setName] = useState();
     const [description, setDescription] = useState(); 
+    const [cards, setCards] = useState([])
     const apiUrl = import.meta.env.VITE_API_URL;
 
 
     async function handleSubmit() {
         event.preventDefault()
-        const payload = { name, description }
+        const payload = { name, description, cards }
         
         try {
             const response = await fetch(`${apiUrl}/collections`,
