@@ -6,8 +6,7 @@ function UpdateCollection() {
     const { collectionId } = useParams();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [cards, setCards] = useState('')
-    const [checked, setChecked] = useState(true);
+    const [cards, setCards] = useState('');
     const navigate = useNavigate();
     const apiUrl =  import.meta.env.VITE_API_URL;
 
@@ -49,8 +48,9 @@ function UpdateCollection() {
         }
     }
 
-    function handleChangeCheck(event) {
-        setChecked(event.target.checked);
+    function handleDeleteCard(card){
+        const newCards = cards.filter(function(el) { return el != card; })
+        setCards(newCards)
     }
 
     return (
@@ -79,21 +79,19 @@ function UpdateCollection() {
                     onChange={event => setDescription(event.target.value)}
                 />
                 <Grid container spacing={5}>
-                <FormGroup>
-                    {cards && cards.map((cardObj) => {
+                    {cards && cards.map((card) => {
                         return (
-                            <Grid item key={cardObj} xs={6} md={4} spacing={2}>
+                            <Grid item key={card.id} xs={6} md={4} spacing={2} mt={2} mb={2}>
                                 <Card sx={{ maxWidth: 245, objectFit:"contain" }}>
-                                    <FormControlLabel control={<Checkbox checked={checked} onChange={handleChangeCheck} />} />
                                     <CardMedia 
                                         component="img"
-                                        image={`https://images.pokemontcg.io/${cardObj.replace(/-[^-]*$/, "")}/1_hires.png`}
+                                        image={card.images.large}
                                     />
+                                <Button variant="contained" onClick={() => handleDeleteCard(card)} sx={{background: "#DA1630", border: "4px solid #FFCD05", marginTop: '1em', textTransform: 'capitalize'}}>Delete Card</Button>
                                 </Card>
                             </Grid>
                         )
                     })}
-                </FormGroup>
             </Grid>
                 <Button type='submit'>Edit your collection&apos;s</Button>
             </form>
