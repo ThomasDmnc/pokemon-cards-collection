@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import NewCollection from './pages/NewCollectionPage'
 import CollectionsPage from './pages/CollectionsPage'
 import CollectionDetails from './pages/CollectionDetailsPage'
+import UpdateCollection from './pages/UpdateCollectionPage'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/collections" element={<CollectionsPage />} />
       <Route path="/collections/:collectionId" element={<CollectionDetails />} />
       <Route path="/collections/new" element={<NewCollection />} />
+      <Route path="collections/edit/:collectionId" element={<UpdateCollection />} />
 
       <Route path="*" element={<h1>404 Page</h1>} />
 

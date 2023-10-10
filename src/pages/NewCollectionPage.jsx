@@ -28,7 +28,7 @@ function NewCollection() {
             if (response.ok) {
                 const currentCollection = await response.json();
                 console.log(currentCollection);
-                navigate('/');
+                navigate(`/collections/${currentCollection.id}`)
             }
         } catch (error) {
             console.log(error)
