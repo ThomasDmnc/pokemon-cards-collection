@@ -9,6 +9,7 @@ function CollectionDetails() {
     const [isLoading, setIsLoading] = useState(true);
     const apiUrl =  import.meta.env.VITE_API_URL;
 
+
     async function getCollection() {
         const response = await fetch(`${apiUrl}/collections/${collectionId}`)
         if (response.ok) {
@@ -18,26 +19,25 @@ function CollectionDetails() {
         }
     }
 
-
-    useEffect(() =>{
+    useEffect(() => {
         getCollection();
     }, [])
+
 
     return isLoading ? (<CircularProgress/ >) :  (
         <>
             <h1> {collection.name} </h1>
             <p>{collection.description}</p>
             <h4>The collection&apos;s card:</h4>
-            {console.log(collection.cards.length)}
             {collection.cards.length == 0  ? (<p>No cards added</p>) : (<></>)}
             <Grid container spacing={5}>
-                {collection.cards && collection.cards.map((cardObj) => {
+                {collection && collection.cards.map((cardObj) => {
                     return (
-                        <Grid item key={cardObj} xs={6} md={4}>
-                            <Card sx={{ maxWidth: 245, objectFit:"contain" }} component={Link} to={`/cards/${cardObj}`}>
+                        <Grid item key={cardObj.id} xs={6} md={4}>
+                            <Card sx={{ maxWidth: 245, objectFit:"contain" }} component={Link} to={`/cards/${cardObj.id}`}>
                                 <CardMedia 
                                     component="img"
-                                    image={`https://images.pokemontcg.io/${cardObj.replace(/-[^-]*$/, "")}/1_hires.png`}
+                                    image={cardObj.images.large}
                                 />
                             </Card>
                         </Grid>

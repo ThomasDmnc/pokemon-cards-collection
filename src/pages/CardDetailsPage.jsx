@@ -43,7 +43,7 @@ function CardDetails() {
 
     const addCardToCollection = async (collection) => {
         event.preventDefault()
-        const payload = {cards: [...collection.cards, cardId] }
+        const payload = {cards: [...collection.cards, card] }
         try {
             const response = await fetch(`${apiUrl}/collections/${collection.id}`,
             {
