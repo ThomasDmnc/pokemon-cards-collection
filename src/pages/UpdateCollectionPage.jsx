@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { TextField, Button, Grid, Card, CardMedia, Checkbox, FormGroup, FormControlLabel  } from '@mui/material'
+import { TextField, Button, Grid, Card, CardMedia} from '@mui/material'
+import bgImg from '../assets/bg-grain.png'
  
 function UpdateCollection() {
     const { collectionId } = useParams();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [cards, setCards] = useState('')
-    const [checked, setChecked] = useState(true);
+    const [cards, setCards] = useState('');
     const navigate = useNavigate();
     const apiUrl =  import.meta.env.VITE_API_URL;
 
@@ -20,6 +20,21 @@ function UpdateCollection() {
             setDescription(collectionsApi.description)
         }
     }
+
+    const styles = {
+        cardBackground: {
+            display: "flex", 
+            flexDirection: "column", 
+            alignItems: "center", 
+            justifyContent: "center", 
+            maxWidth: 245, 
+            objectFit: "contain", 
+            padding: '20px', 
+            border: '4px solid #FFCD05', 
+            borderRadius: '15px', 
+            background: 'linear-gradient(180deg, #3B79C9 0%, rgba(116, 155, 207, 0.64) 35.94%, rgba(116, 155, 207, 0.64) 64.06%, #FBFBFB 100%)'
+        }
+    };
 
     useEffect(() => {
         fetchCollection();
@@ -49,17 +64,18 @@ function UpdateCollection() {
         }
     }
 
-    function handleChangeCheck(event) {
-        setChecked(event.target.checked);
+    function handleDeleteCard(card){
+        const newCards = cards.filter(function(el) { return el != card; })
+        setCards(newCards)
     }
 
     return (
         <>
             <h1>Update your collection:</h1>
             <form className='form' onSubmit={handleSubmit}>
-                <label htmlFor="">Your collection name:</label>
+                <label style={{paddingBottom: '15px'}} htmlFor="">Your collection name:</label>
                 <TextField
-                    sx={{}}
+                    sx={{paddingBottom: 2}}
                     required
                     id="outlined-required"
                     label="Required"
@@ -67,8 +83,9 @@ function UpdateCollection() {
                     value={name}
                     onChange={event => setName(event.target.value)}
                 />
-                <label htmlFor="">A description:</label>
+                <label style={{paddingBottom: '15px'}} htmlFor="">A description:</label>
                 <TextField
+                    sx={{paddingBottom: 2}}
                     required
                     id="outlined-required"
                     label="Required"
@@ -79,23 +96,21 @@ function UpdateCollection() {
                     onChange={event => setDescription(event.target.value)}
                 />
                 <Grid container spacing={5}>
-                <FormGroup>
-                    {cards && cards.map((cardObj) => {
+                    {cards && cards.map((card) => {
                         return (
-                            <Grid item key={cardObj} xs={6} md={4} spacing={2}>
-                                <Card sx={{ maxWidth: 245, objectFit:"contain" }}>
-                                    <FormControlLabel control={<Checkbox checked={checked} onChange={handleChangeCheck} />} />
+                            <Grid item key={card.id} xs={6} md={4} spacing={2} mt={2} mb={2} sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
+                                <Card style={styles.cardBackground}>
                                     <CardMedia 
                                         component="img"
-                                        image={`https://images.pokemontcg.io/${cardObj.replace(/-[^-]*$/, "")}/1_hires.png`}
+                                        image={card.images.large}
                                     />
+                                <Button variant="contained" onClick={() => handleDeleteCard(card)} sx={{background: "#DA1630", border: "4px solid #FFCD05", marginTop: '1em', textTransform: 'capitalize'}}>Delete Card</Button>
                                 </Card>
                             </Grid>
                         )
                     })}
-                </FormGroup>
             </Grid>
-                <Button type='submit'>Edit your collection&apos;s</Button>
+                <Button variant="contained" sx={{background: "#3B79C9", border: "4px solid #FFCD05", marginTop: '1em', marginRight : '2em', textTransform: 'capitalize',  mt: '4rem'}} type='submit'>Edit your collection&apos;s</Button>
             </form>
         </>
     )
