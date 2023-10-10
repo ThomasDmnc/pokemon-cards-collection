@@ -57,9 +57,9 @@ function UpdateCollection() {
         <>
             <h1>Update your collection:</h1>
             <form className='form' onSubmit={handleSubmit}>
-                <label htmlFor="">Your collection name:</label>
+                <label style={{paddingBottom: '15px'}} htmlFor="">Your collection name:</label>
                 <TextField
-                    sx={{}}
+                    sx={{paddingBottom: 2}}
                     required
                     id="outlined-required"
                     label="Required"
@@ -67,8 +67,9 @@ function UpdateCollection() {
                     value={name}
                     onChange={event => setName(event.target.value)}
                 />
-                <label htmlFor="">A description:</label>
+                <label style={{paddingBottom: '15px'}} htmlFor="">A description:</label>
                 <TextField
+                    sx={{paddingBottom: 2}}
                     required
                     id="outlined-required"
                     label="Required"
@@ -81,8 +82,8 @@ function UpdateCollection() {
                 <Grid container spacing={5}>
                     {cards && cards.map((card) => {
                         return (
-                            <Grid item key={card.id} xs={6} md={4} spacing={2} mt={2} mb={2}>
-                                <Card sx={{ maxWidth: 245, objectFit:"contain" }}>
+                            <Grid item key={card.id} xs={6} md={4} spacing={2} mt={2} mb={2} sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
+                                <Card sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", maxWidth: 245, objectFit: "contain", padding: '20px', border: '4px solid #FFCD05', borderRadius: '15px', background: 'linear-gradient(180deg, #E4A581 0%, rgba(230, 199, 137, 0.56) 26.04%, #E6C789 60.42%, #FFF 100%)' }}>
                                     <CardMedia 
                                         component="img"
                                         image={card.images.large}
@@ -93,7 +94,7 @@ function UpdateCollection() {
                         )
                     })}
             </Grid>
-                <Button type='submit'>Edit your collection&apos;s</Button>
+                <Button variant="contained" sx={{background: "#3B79C9", border: "4px solid #FFCD05", marginTop: '1em', marginRight : '2em', textTransform: 'capitalize',  mt: '4rem'}} type='submit'>Edit your collection&apos;s</Button>
             </form>
         </>
     )
