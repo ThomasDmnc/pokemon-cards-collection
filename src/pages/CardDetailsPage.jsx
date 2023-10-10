@@ -47,7 +47,7 @@ function CardDetails() {
     };
 
     const addCardToCollection = async (collection) => {
-        if (collection.cards.includes(cardId)) {
+        if (collection.cards.some(cardD => cardD.id === card.id)) {
             setSnackBar({open: true, message: `This Card is alredy in the collection: ${collection.name}`})
         } else {
             const payload = { cards: [...collection.cards, card] }
