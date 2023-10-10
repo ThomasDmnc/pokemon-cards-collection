@@ -50,7 +50,7 @@ function CardDetails() {
         if (collection.cards.includes(cardId)) {
             setSnackBar({open: true, message: `This Card is alredy in the collection: ${collection.name}`})
         } else {
-            const payload = { cards: [...collection.cards, cardId] }
+            const payload = { cards: [...collection.cards, card] }
             try {
                 const response = await fetch(`${apiUrl}/collections/${collection.id}`,
                     {
