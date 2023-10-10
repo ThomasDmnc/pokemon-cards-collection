@@ -28,7 +28,8 @@ function CollectionDetails() {
             <h1> {collection.name} </h1>
             <p>{collection.description}</p>
             <h4>The collection&apos;s card:</h4>
-            {!collection.cards ? (<p>No cards added</p>) : (<></>)}
+            {console.log(collection.cards.length)}
+            {collection.cards.length == 0  ? (<p>No cards added</p>) : (<></>)}
             <Grid container spacing={5}>
                 {collection.cards && collection.cards.map((cardObj) => {
                     return (
@@ -43,7 +44,7 @@ function CollectionDetails() {
                     )
                 })}
             </Grid>
-            <Button variant="contained" href={`/collections/edit/${collectionId}`} sx={{background: "#3B79C9", border: "4px solid #FFCD05", marginTop: '1em', textTransform: 'capitalize'}}>
+            <Button variant="contained" href={`/collections/edit/${collectionId}`} sx={{background: "#3B79C9", border: "4px solid #FFCD05", marginTop: '1em', textTransform: 'capitalize',  mt: '4rem'}}>
                     Edit your collection
             </Button>
         </>
