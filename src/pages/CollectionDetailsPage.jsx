@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { CircularProgress, Grid, Card, CardMedia, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -7,6 +7,7 @@ function CollectionDetails() {
     const { collectionId } = useParams();
     const [collection, setCollection] = useState();
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
     const apiUrl =  import.meta.env.VITE_API_URL;
 
 
@@ -16,6 +17,21 @@ function CollectionDetails() {
             const collectionsApi = await response.json()
             setCollection(collectionsApi);
             setIsLoading(false);
+        }
+    }
+
+    async function handleDelete(){
+        try {
+            const response = await fetch(`${apiUrl}/collections/${collectionId}`,{
+                method: 'DELETE',
+            })
+            if (response.ok){
+                const parsed = await response.json()
+                console.log(parsed)
+                navigate('/collections')
+            }
+        } catch (error){
+            console.log(error)
         }
     }
 
@@ -44,8 +60,11 @@ function CollectionDetails() {
                     )
                 })}
             </Grid>
-            <Button variant="contained" href={`/collections/edit/${collectionId}`} sx={{background: "#3B79C9", border: "4px solid #FFCD05", marginTop: '1em', textTransform: 'capitalize',  mt: '4rem'}}>
+            <Button variant="contained" href={`/collections/edit/${collectionId}`} sx={{background: "#3B79C9", border: "4px solid #FFCD05", marginTop: '1em', marginRight : '2em', textTransform: 'capitalize',  mt: '4rem'}}>
                     Edit your collection
+            </Button>
+            <Button variant="contained" onClick={handleDelete} sx={{background: "#DA1630", border: "4px solid #FFCD05", marginTop: '1em', textTransform: 'capitalize',  mt: '4rem'}}>
+                    Delete your collection
             </Button>
         </>
     );
