@@ -43,7 +43,7 @@ function CollectionDetails() {
                     )
                 })}
             </Grid>
-            <Button variant="contained" href="/collections/new" sx={{background: "#3B79C9", border: "4px solid #FFCD05", marginTop: '1em', textTransform: 'capitalize'}}>
+            <Button variant="contained" href={`/collections/edit/${collectionId}`} sx={{background: "#3B79C9", border: "4px solid #FFCD05", marginTop: '1em', textTransform: 'capitalize'}}>
                     Edit your collection
             </Button>
         </>

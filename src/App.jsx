@@ -19,7 +19,7 @@ function App() {
       <Route path="/collections" element={<CollectionsPage />} />
       <Route path="/collections/:collectionId" element={<CollectionDetails />} />
       <Route path="/collections/new" element={<NewCollection />} />
-      <Route path="collection/:collectionId/update" element={<UpdateCollection />} />
+      <Route path="collections/edit/:collectionId" element={<UpdateCollection />} />
 
       <Route path="*" element={<h1>404 Page</h1>} />
 
