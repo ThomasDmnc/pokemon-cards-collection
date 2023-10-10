@@ -7,7 +7,7 @@ function UpdateCollection() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [cards, setCards] = useState('')
-    const [checked, setChecked] = useState(true)
+    const [checked, setChecked] = useState(true);
     const navigate = useNavigate();
     const apiUrl =  import.meta.env.VITE_API_URL;
 
