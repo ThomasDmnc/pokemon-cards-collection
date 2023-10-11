@@ -26,13 +26,12 @@ function HomePage() {
     }
 
     const handleSearchChange = event => {
-        setSearch("&q=name:"+event.target.value+"*&")
-        console.log(search)
-        getCards(currentPage)
+        setSearch("&q=name:"+event.target.value+"*&");
+        getCards(currentPage);
     }
 
     useEffect(() => {
-        getCards(currentPage)
+        getCards(currentPage);
     }, [])
 
     return cards ? (
