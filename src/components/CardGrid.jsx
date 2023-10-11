@@ -24,7 +24,7 @@ function CardGrid(props) {
 
     useEffect(() => {
         setCards(props.props)
-    }, [cards])
+    })
 
     return (
         <>
