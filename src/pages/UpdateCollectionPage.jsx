@@ -109,7 +109,7 @@ function UpdateCollection() {
                             </Grid>
                         )
                     })}
-            </Grid>
+                </Grid>
                 <Button variant="contained" sx={{background: "#3B79C9", border: "4px solid #FFCD05", marginTop: '1em', marginRight : '2em', textTransform: 'capitalize',  mt: '4rem'}} type='submit'>Edit your collection&apos;s</Button>
             </form>
         </>
