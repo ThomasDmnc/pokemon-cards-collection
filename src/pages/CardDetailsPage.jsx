@@ -1,12 +1,13 @@
 import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CircularProgress, Snackbar, Typography } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import './CardDetailsPage.css';
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal';
+import MySnackBar from "../components/MySnackBar";
 
 const style = {
     position: 'absolute',
@@ -26,11 +27,12 @@ function CardDetails() {
     const [isLoading, setIsLoading] = useState(true);
     const [openModal, setOpenModal] = useState(false);
     const [collections, setCollections] = useState()
+    
     const [snackBar, setSnackBar] = useState({
         open: false,
         message: ''
     });
-    const { open, message } = snackBar;
+
     const apiUrl = import.meta.env.VITE_API_URL;
 
     const handleOpen = async () => {
@@ -147,15 +149,7 @@ function CardDetails() {
                         <Button onClick={handleCloseModal}>No</Button>
                     </Box>
                 </Modal>
-                <Box sx={{ width: 500 }}>
-                    <Snackbar
-                        anchorOrigin={ {vertical: 'top', horizontal: 'center'}}
-                        open={open}
-                        autoHideDuration={3000}
-                        message={message}
-                        onClose={closeSnackBar}
-                    />
-                </Box>
+                <MySnackBar options={snackBar} closeSnackBar={closeSnackBar}/>
                 {/* row2 */}
             </Fragment>
         )
