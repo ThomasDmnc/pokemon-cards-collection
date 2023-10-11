@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { CircularProgress, Button } from "@mui/material";
+import { CircularProgress, Button, Box } from "@mui/material";
 import CardGrid from "../components/CardGrid";
 
 function CollectionDetails() {
@@ -40,7 +40,7 @@ function CollectionDetails() {
     }, [])
 
 
-    return isLoading ? (<CircularProgress/ >) :  (
+    return isLoading ? (<Box sx={{display: 'flex', flexDirection:'column', width:'100%', height:'70vh', alignItems: 'center', justifyContent:'center'}}><CircularProgress /></Box>) :  (
         <>
             <h1> {collection.name} </h1>
             <p>{collection.description}</p>

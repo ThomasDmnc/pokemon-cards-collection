@@ -24,7 +24,7 @@ function CollectionsPage() {
     //     console.log(collections[key].id);
     // });
 
-    return isLoading ? (<CircularProgress/ >) : (
+    return isLoading ? (<Box sx={{display: 'flex', flexDirection:'column', width:'100%', height:'70vh', alignItems: 'center', justifyContent:'center'}}><CircularProgress /></Box>) : (
         <>
             <h1>All the collections:</h1>
                 <Grid container spacing={2}>

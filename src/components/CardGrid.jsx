@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 
 function CardGrid(props) {
-    const [cards, setCards]= useState();
+    const [cards, setCards] = useState();
 
     const styles = {
         cardBackground: {
@@ -16,7 +16,7 @@ function CardGrid(props) {
             padding: '20px', 
             border: '4px solid #FFCD05', 
             borderRadius: '15px', 
-            background: 'linear-gradient(180deg, #3B79C9 0%, rgba(116, 155, 207, 0.64) 35.94%, rgba(116, 155, 207, 0.64) 64.06%, #FBFBFB 100%)',
+            background: 'linear-gradient(180deg, #F6BC9B 0%, #FAD9C7 37.5%, #FFD4BC 66.15%, #FFF 100%)',
             fontWeigth: '700',
             fontSize: '24px',
         }

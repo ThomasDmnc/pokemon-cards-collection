@@ -1,7 +1,5 @@
-import { Box, Card, CardActionArea, CardMedia, CircularProgress, Pagination, TextField } from "@mui/material"
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2"
+import { Box, CircularProgress, Pagination, TextField } from "@mui/material"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom";
 import CardGrid from "../components/CardGrid";
 
 function HomePage() {
@@ -53,7 +51,7 @@ function HomePage() {
             </Box>
         </div>
     ) :
-        (<CircularProgress />);
+        (<Box sx={{display: 'flex', flexDirection:'column', width:'100%', height:'70vh', alignItems: 'center', justifyContent:'center'}}><CircularProgress /></Box>);
 }
 
 export default HomePage;

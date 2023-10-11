@@ -91,7 +91,7 @@ function CardDetails() {
         fetchCardDetails();
     }, [])
 
-    return isLoading ? (<CircularProgress />) :
+    return isLoading ? (<Box sx={{display: 'flex', flexDirection:'column', width:'100%', height:'70vh', alignItems: 'center', justifyContent:'center'}}><CircularProgress /></Box>) :
         (
             <Fragment>
                 <h1>{card.name}</h1>
