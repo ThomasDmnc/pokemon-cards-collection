@@ -94,19 +94,22 @@ function CardDetails() {
         fetchCardDetails();
     }, [])
 
-    const element = document.querySelector(".card");
+
 
     function rotateCard(event) {
+        const element = document.querySelector(".card");
+        // getting info for card size
         let elWidth = element.clientWidth;
         let elHeigth = element.clientHeight;
         let elRect = element.getBoundingClientRect();
+
+        // changing variables taking in account mouse position and card size
         let X = (event.clientX - elRect.left) / elWidth;
         let Y = (event.clientY - elRect.top) / elHeigth;
-        
-        console.log(elHeigth)
         let rX = -(-X - 0.5) * 20;
         let rY = (Y - 0.5) * 20;
-    
+        
+        // creating transform variable for the CSS
         document.documentElement.style.setProperty("--x", 100 * X + "%");
         document.documentElement.style.setProperty("--y", 100 * Y + "%");
         document.documentElement.style.setProperty("--r-x", rX + "deg");
