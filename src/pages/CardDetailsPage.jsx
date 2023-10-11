@@ -89,9 +89,39 @@ function CardDetails() {
         }
     }
 
+
     useEffect(() => {
         fetchCardDetails();
     }, [])
+
+    const element = document.querySelector(".card");
+
+    function rotateCard(event) {
+        let elWidth = element.clientWidth;
+        let elHeigth = element.clientHeight;
+        let elRect = element.getBoundingClientRect();
+        let X = (event.clientX - elRect.left) / elWidth;
+        let Y = (event.clientY - elRect.top) / elHeigth;
+        
+        console.log(elHeigth)
+        let rX = -(-X - 0.5) * 20;
+        let rY = (Y - 0.5) * 20;
+    
+        document.documentElement.style.setProperty("--x", 100 * X + "%");
+        document.documentElement.style.setProperty("--y", 100 * Y + "%");
+        document.documentElement.style.setProperty("--r-x", rX + "deg");
+        document.documentElement.style.setProperty("--r-y", rY + "deg");
+    }
+
+    function clearRotate(event) {
+        if (event.target.classList.contains("card")) {
+            document.documentElement.style.setProperty("--x", "0%");
+            document.documentElement.style.setProperty("--x", "0%");
+            document.documentElement.style.setProperty("--y", "0%");
+            document.documentElement.style.setProperty("--r-x", "0%");
+            document.documentElement.style.setProperty("--r-y", "0%");
+        }
+    }
 
     return isLoading ? (<Box sx={{display: 'flex', flexDirection:'column', width:'100%', height:'70vh', alignItems: 'center', justifyContent:'center'}}><CircularProgress /></Box>) :
         (
@@ -101,7 +131,13 @@ function CardDetails() {
                 {/* Col1 */}
                 <Grid container rowSpacing={3} columnSpacing={{ sm: 1, md: 2 }}>
                     <Grid item xs={4} md={4} sx={{}}>
-                        <img src={card.images.large} alt="" style={{ height: '500px' }} />
+                        <div className="card" onMouseMove={event => rotateCard(event)} onMouseLeave={event => clearRotate(event)}>
+                            <div className="card__3d">
+                                <div className="card__image">
+                                    <img src={card.images.large} alt="" style={{ height: '500px' }} />
+                                </div>    
+                            </div>
+                        </div>
                     </Grid>
                     <Grid item xs={8} md={8} sx={{}}>
                         <Box sx={{ border: '3px solid #3B79C9', borderRadius: "15px", padding: '25px' }}>
