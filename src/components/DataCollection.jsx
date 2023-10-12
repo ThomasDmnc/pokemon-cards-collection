@@ -21,9 +21,9 @@ function DataCollection(props) {
 
             counts[card.rarity] = counts[card.rarity] ? counts[card.rarity] + 1 : 1;
 
-            setAverageSellPrice(averageSellPrice + cardValue)
-            setAvg7(avg7 + cardValue7d)
-            setAvg30(avg30 + cardValue30d)
+            setAverageSellPrice(prev => prev + cardValue)
+            setAvg7(prev => prev  + cardValue7d)
+            setAvg30(prev => prev  + cardValue30d)
         })
         
         const rarityWithoutUndefined = Object.keys(counts).filter((key) => !key.includes("undefined")).reduce((obj, key) => {return Object.assign(obj, {[key]: counts[key]});}, {});
