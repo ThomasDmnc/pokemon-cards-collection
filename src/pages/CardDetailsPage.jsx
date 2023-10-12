@@ -139,7 +139,8 @@ function CardDetails() {
                                 <div className="card__3d">
                                     <div className="card__image" onMouseMove={event => rotateCard(event)} onMouseLeave={event => clearRotate(event)}>
                                         <img className="card__" src={card.images.large} alt="" />
-                                    </div>    
+                                        <div className="light-layer1"></div>    
+                                    </div>
                                 </div>
                             </div>
                         </div>
