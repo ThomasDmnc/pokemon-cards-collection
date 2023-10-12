@@ -106,8 +106,8 @@ function CardDetails() {
         // changing variables taking in account mouse position and card size
         let X = (event.clientX - elRect.left) / elWidth;
         let Y = (event.clientY - elRect.top) / elHeigth;
-        let rX = -(-X - 0.5) * 20;
-        let rY = (Y - 0.5) * 20;
+        let rX = -(X - 0.5) * 35;
+        let rY = (Y - 0.5) * 35;
         
         // creating transform variable for the CSS
         document.documentElement.style.setProperty("--x", 100 * X + "%");
@@ -117,7 +117,7 @@ function CardDetails() {
     }
 
     function clearRotate(event) {
-        if (event.target.classList.contains("card")) {
+        if (!event.target.classList.contains("card")) {
             document.documentElement.style.setProperty("--x", "0%");
             document.documentElement.style.setProperty("--x", "0%");
             document.documentElement.style.setProperty("--y", "0%");
@@ -134,11 +134,13 @@ function CardDetails() {
                 {/* Col1 */}
                 <Grid container rowSpacing={3} columnSpacing={{ sm: 1, md: 2 }}>
                     <Grid item xs={4} md={4} sx={{}}>
-                        <div className="card" onMouseMove={event => rotateCard(event)} onMouseLeave={event => clearRotate(event)}>
-                            <div className="card__3d">
-                                <div className="card__image">
-                                    <img src={card.images.large} alt="" style={{ height: '500px' }} />
-                                </div>    
+                        <div className="card">
+                            <div className="card__wrapper">
+                                <div className="card__3d">
+                                    <div className="card__image" onMouseMove={event => rotateCard(event)} onMouseLeave={event => clearRotate(event)}>
+                                        <img className="card__" src={card.images.large} alt="" />
+                                    </div>    
+                                </div>
                             </div>
                         </div>
                     </Grid>
