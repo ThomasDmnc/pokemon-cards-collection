@@ -1,6 +1,7 @@
 
 # Pokéllection
 [Click here to see the deployed app](https://playful-faun-068941.netlify.app/)
+Project was made by Eugen Freund and Thomas Demoncy.
 
 ## Project Description
 
