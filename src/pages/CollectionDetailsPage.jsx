@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { CircularProgress, Button, Box } from "@mui/material";
 import CardGrid from "../components/CardGrid";
-import { Link } from "react-router-dom";
+import DataCollection from "../components/DataCollection";
 
 function CollectionDetails() {
     const { collectionId } = useParams();
@@ -46,7 +46,8 @@ function CollectionDetails() {
         <>
             <h1> {collection.name} </h1>
             <p>{collection.description}</p>
-            <h4>The collection&apos;s card:</h4>
+            <DataCollection props={collection.cards} />
+            <h3>The collection&apos;s card:</h3>
             {collection.cards.length == 0  ? (<p>No cards added</p>) : (<></>)}
             <CardGrid props={collection.cards} />
             <Button variant="contained" sx={{background: "#3B79C9", border: "4px solid #FFCD05", marginTop: '1em', marginRight : '2em', textTransform: 'capitalize',  mt: '4rem'}}>
@@ -57,6 +58,7 @@ function CollectionDetails() {
             <Button variant="contained" onClick={handleDelete} sx={{ background: "#DA1630", border: "4px solid #FFCD05", marginTop: '1em', textTransform: 'capitalize', mt: '4rem' }}>
                 Delete your collection
             </Button>
+
         </>
     );
 }
