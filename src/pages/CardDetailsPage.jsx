@@ -107,10 +107,10 @@ function CardDetails() {
                         <Box sx={{ border: '3px solid #3B79C9', borderRadius: "15px", padding: '25px' }}>
                             <div>
                                 <h2>About the card:</h2>
-                                <p>Set Name: <Chip label={card.set.name} variant="outlined" /> </p>
-                                <p>Series: <Chip label={card.set.series} variant="outlined" />  </p>
-                                <p>Number of cards printed: <Chip label={card.set.printedTotal} variant="outlined" />  </p>
-                                <p>Rarity: <Chip label={card.rarity} variant="outlined" />  </p>
+                                <div style={{marginBottom: "15px"}}>Set Name: <Chip label={card.set.name} variant="outlined" /> </div>
+                                <div style={{marginBottom: "15px"}}>Series: <Chip label={card.set.series} variant="outlined" />  </div>
+                                <div style={{marginBottom: "15px"}}>Number of cards printed: <Chip label={card.set.printedTotal} variant="outlined" />  </div>
+                                <div style={{marginBottom: "15px"}}>Rarity: <Chip label={card.rarity} variant="outlined" />  </div>
                             </div>
                             <div>
                                 <h2>Prices:</h2>
@@ -139,14 +139,14 @@ function CardDetails() {
                 >
                     <Box sx={style}>
                         <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Your collection:
+                            add the card to the colletion:
                         </Typography>
                         {collections && (<Typography id="modal-modal-description" sx={{ mt: 2 }}>
                             {collections.map((collection) => (
                                 <li key={collection.id}><Button onClick={() => addCardToCollection(collection)}>{collection.name}</Button></li>
                             ))}
                         </Typography>)}
-                        <Button onClick={handleCloseModal}>No</Button>
+                        <Button onClick={handleCloseModal}>none of these</Button>
                     </Box>
                 </Modal>
                 <MySnackBar options={snackBar} closeSnackBar={closeSnackBar}/>

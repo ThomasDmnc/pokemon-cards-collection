@@ -31,7 +31,7 @@ function CardGrid(props) {
         <Grid container spacing={5}>
         {cards && cards.map((card) => {
             return (
-                <Grid item key={card.id} xs={6} md={4} spacing={2} mt={2} mb={2} sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
+                <Grid item key={card.id} xs={6} md={4} mt={2} mb={2} sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
                     <Card style={styles.cardBackground} component={Link} to={`/cards/${card.id}`}>
                         <h4 style={{marginTop: '0', marginBottom: '1em'}}>{card.name}</h4>
                         <CardMedia 

@@ -1,5 +1,6 @@
 import { Box, CircularProgress, Pagination, TextField } from "@mui/material"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback, useMemo } from "react"
+import debounce from "lodash/debounce"
 import CardGrid from "../components/CardGrid";
 
 function HomePage() {
@@ -10,13 +11,22 @@ function HomePage() {
     const [search, setSearch] = useState('');
 
     const handlePageChange = (event, newPage) => {
-        getCards(newPage)
+        getCards(newPage, search)
         setCurrentPage(newPage);
     };
 
+    const sendQuery = useCallback((searchValue) => {
+        console.log(searchValue)
+        setCurrentPage(1);
+        getCards( currentPage, searchValue)
+      }, []);
 
-    const getCards = async (loadPage) => {
-        const response = await fetch(`https://api.pokemontcg.io/v2/cards?${search}page=${loadPage}&pageSize=${cardsPerPage}`)
+    const debouncedSendQuery = useMemo(() => {
+        return debounce(sendQuery, 500);
+      }, [sendQuery]);
+
+    const getCards = async (loadPage, searchValue) => {
+        const response = await fetch(`https://api.pokemontcg.io/v2/cards?&q=name:${searchValue}*&page=${loadPage}&pageSize=${cardsPerPage}`)
         if (response.ok) {
             const cardsAPI = await response.json()
             setTotalCards(cardsAPI.totalCount)
@@ -25,12 +35,13 @@ function HomePage() {
     }
 
     const handleSearchChange = event => {
-        setSearch("&q=name:"+event.target.value+"*&");
-        getCards(currentPage);
+        const value = event.target.value;
+        setSearch(value);
+        debouncedSendQuery(value);
     }
 
     useEffect(() => {
-        getCards(currentPage);
+        getCards(currentPage, '');
     }, [])
 
     return cards ? (
@@ -38,7 +49,16 @@ function HomePage() {
             <h1>Start your Pokéllection</h1>
             <h4>Looking for a specific Pokémon:</h4>
             <div className="searchBar" style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                    <TextField onChange={handleSearchChange} name="search" type="text" id="filled-basic" label="Name of the Pokémon you're looking for" variant="filled" sx={{width: '100%', m: 2}}/>
+                    <TextField
+                        spellCheck='false'
+                        autoComplete='off'
+                        onChange={handleSearchChange} 
+                        value={search} 
+                        type="text" 
+                        id="filled-basic" 
+                        label="Name of the Pokémon you're looking for" 
+                        variant="filled" 
+                        sx={{width: '100%', m: 2}}/>
             </div>
             <CardGrid props={cards} />
             <Box sx={{display: 'flex', alignItems: 'center', justifyContent:'center'}}>

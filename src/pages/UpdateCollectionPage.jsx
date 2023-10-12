@@ -98,7 +98,7 @@ function UpdateCollection() {
                 <Grid container spacing={5}>
                     {cards && cards.map((card) => {
                         return (
-                            <Grid item key={card.id} xs={6} md={4} spacing={2} mt={2} mb={2} sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
+                            <Grid item key={card.id} xs={6} md={4} mt={2} mb={2} sx={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
                                 <Card style={styles.cardBackground}>
                                     <CardMedia 
                                         component="img"

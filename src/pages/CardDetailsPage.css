@@ -1,3 +1,7 @@
 h1, h4, p {
    color: #1A2556;
 }
+
+li{
+   list-style-type:none;
+}
