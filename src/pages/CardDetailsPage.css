@@ -1,5 +1,54 @@
-h1, h4, p {
-   color: #1A2556;
+h1,
+h4,
+p {
+  color: #1a2556;
+}
+
+.card {
+  box-sizing: border-box;
+  position: relative;
+  height: 100%;
+  width: 100%
+}
+
+.card__wrapper{
+  perspective: 600px;
+  position: absolute;
+  inset: 0;
+}
+
+.card__3d {
+  transform: rotateY(var(--r-x)) rotateX(var(--r-y));
+  transition: transform 0.1s;
+  position: absolute;
+  inset: 0;
+}
+.card__image{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+
+.card__image img {
+  clip-path: inset(0 0 0 0 round 10px);
+  display: block;
+  max-width: 75%;
+  max-height: 75%;
+}
+
+.light-layer1{
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  mix-blend-mode: soft-light;
+  clip-path: inset(0 0 1px 0 round 10px);
+  background: radial-gradient(
+    farthest-corner circle at var(--x) var(--y),
+    rgba(255, 255, 255, 0.8) 10%,
+    rgba(255, 255, 255, 0.65) 20%,
+    rgba(255, 255, 255, 0) 90%
+  );
 }
 
 li{

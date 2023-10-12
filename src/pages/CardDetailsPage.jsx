@@ -89,9 +89,42 @@ function CardDetails() {
         }
     }
 
+
     useEffect(() => {
         fetchCardDetails();
     }, [])
+
+
+
+    function rotateCard(event) {
+        const element = document.querySelector(".card");
+        // getting info for card size
+        let elWidth = element.clientWidth;
+        let elHeigth = element.clientHeight;
+        let elRect = element.getBoundingClientRect();
+
+        // changing variables taking in account mouse position and card size
+        let X = (event.clientX - elRect.left) / elWidth;
+        let Y = (event.clientY - elRect.top) / elHeigth;
+        let rX = -(X - 0.5) * 35;
+        let rY = (Y - 0.5) * 35;
+        
+        // creating transform variable for the CSS
+        document.documentElement.style.setProperty("--x", 100 * X + "%");
+        document.documentElement.style.setProperty("--y", 100 * Y + "%");
+        document.documentElement.style.setProperty("--r-x", rX + "deg");
+        document.documentElement.style.setProperty("--r-y", rY + "deg");
+    }
+
+    function clearRotate(event) {
+        if (!event.target.classList.contains("card")) {
+            document.documentElement.style.setProperty("--x", "0%");
+            document.documentElement.style.setProperty("--x", "0%");
+            document.documentElement.style.setProperty("--y", "0%");
+            document.documentElement.style.setProperty("--r-x", "0%");
+            document.documentElement.style.setProperty("--r-y", "0%");
+        }
+    }
 
     return isLoading ? (<Box sx={{display: 'flex', flexDirection:'column', width:'100%', height:'70vh', alignItems: 'center', justifyContent:'center'}}><CircularProgress /></Box>) :
         (
@@ -101,7 +134,16 @@ function CardDetails() {
                 {/* Col1 */}
                 <Grid container rowSpacing={3} columnSpacing={{ sm: 1, md: 2 }}>
                     <Grid item xs={4} md={4} sx={{}}>
-                        <img src={card.images.large} alt="" style={{ height: '500px' }} />
+                        <div className="card">
+                            <div className="card__wrapper">
+                                <div className="card__3d">
+                                    <div className="card__image" onMouseMove={event => rotateCard(event)} onMouseLeave={event => clearRotate(event)}>
+                                        <img className="card__" src={card.images.large} alt="" />
+                                        <div className="light-layer1"></div>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </Grid>
                     <Grid item xs={8} md={8} sx={{}}>
                         <Box sx={{ border: '3px solid #3B79C9', borderRadius: "15px", padding: '25px' }}>
