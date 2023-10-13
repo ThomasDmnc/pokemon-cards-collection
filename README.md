@@ -1,6 +1,6 @@
 
 # Pokéllection
-[Click here to see the deployed app](https://playful-faun-068941.netlify.app/)
+[Click here to see the deployed app](pokellection.netlify.app)
 Project was made by Eugen Freund and Thomas Demoncy.
 
 ## Project Description
@@ -63,4 +63,4 @@ In the project we used [Material UI](https://mui.com/material-ui/) for component
 - [Presentation Link](https://docs.google.com/presentation/d/1cyyZBah52xKUcmztpI5PxqzSTHvcgKfNLI-Ggl3bTHs/edit?usp=sharing)
 - [Github repository Link for React app](https://github.com/ThomasDmnc/pokemon-cards-collection)
 - [Github repository Link for Server app](https://github.com/ThomasDmnc/pokemon-cards-server)
-- [Deployment Link](https://playful-faun-068941.netlify.app/)
+- [Deployment Link](pokellection.netlify.app)
